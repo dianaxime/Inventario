@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import com.example.inventario.R
 
 class Adaptproduct (private val items: ArrayList<Producto>): RecyclerView.Adapter<Adaptproduct.AdaptproductViewHolder>(){
@@ -19,7 +20,7 @@ class Adaptproduct (private val items: ArrayList<Producto>): RecyclerView.Adapte
 
 
     override fun onBindViewHolder(p0: AdaptproductViewHolder, p1: Int) {
-
+        p0.prod.text=items[p1].producto
     }
 
 
@@ -40,6 +41,7 @@ class Adaptproduct (private val items: ArrayList<Producto>): RecyclerView.Adapte
 
 
     class AdaptproductViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
+        var prod: TextView =itemView.findViewById(R.id.textView3)
         override fun onClick(v: View?) {}
     }
 }

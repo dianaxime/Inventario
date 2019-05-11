@@ -4,12 +4,13 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+import android.widget.ImageButton
+import android.widget.TextView
 import androidx.navigation.Navigation
 import com.example.inventario.R
 
 class Adapt (private val items: ArrayList<InventariodeProductos>): RecyclerView.Adapter<Adapt.AdaptViewHolder>() {
-    lateinit var  adapter : AdaptadorInv
+    var numfila:Int=0
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AdaptViewHolder {
         val contentView = LayoutInflater.from(parent.context).inflate(R.layout.cardfecha, null)
         return AdaptViewHolder(contentView)
@@ -22,12 +23,11 @@ class Adapt (private val items: ArrayList<InventariodeProductos>): RecyclerView.
 
 
     override fun onBindViewHolder(p0: AdaptViewHolder, p1: Int) {
-        var filaI =items[p1].myProductos
+        numfila=p1
+        var filaI =InventariodeProductos.getfecha(items[p1])
+        p0.fecha.text=filaI
         p0.boton.setOnClickListener {
             Navigation.findNavController(it).navigate(R.id.action_fechaInv_to_inventario)
-
-            adapter = AdaptadorInv(filaI)
-            p0.recycler.adapter=adapter
         }
     }
 
@@ -46,11 +46,14 @@ class Adapt (private val items: ArrayList<InventariodeProductos>): RecyclerView.
         items.clear()
         notifyDataSetChanged()
     }
+    fun getfila():Int{
+        return numfila
+    }
 
 
     class AdaptViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
-        var boton: Button =itemView.findViewById(R.id.imageButton)
-        var recycler: RecyclerView =itemView.findViewById(R.id.productrecycler)
+        var boton: ImageButton =itemView.findViewById(R.id.imageButton)
+        var fecha: TextView=itemView.findViewById(R.id.textView3)
         override fun onClick(v: View?) {}
     }
 }

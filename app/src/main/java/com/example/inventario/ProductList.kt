@@ -28,12 +28,20 @@ class ProductList : Fragment() {
         viewModel = ViewModelProviders.of(this).get(InventarioViewModel::class.java)
 
         adaptp = Adaptproduct(viewModel.getproductos())
-        recyclerproduct.adapter=adaptp
+        binding.recyclerproduct.adapter=adaptp
 
-        recyclerproduct.layoutManager= LinearLayoutManager(activity)
+        binding.recyclerproduct.layoutManager= LinearLayoutManager(activity)
 
-        fabprod.setOnClickListener {
-            Navigation.findNavController(it).navigate(R.id.action_productList_to_addProduct)
+        binding.fabprod.setOnClickListener {
+            val home=AddProduct()
+
+            val fragmentManager=fragmentManager
+
+            val fragmentTransaction=fragmentManager!!.beginTransaction()
+            fragmentTransaction.remove(this)
+            fragmentTransaction.replace(R.id.fragment3,home).commit()
+
+            //Navigation.findNavController(it).navigate(R.id.action_productList_to_addProduct)
         }
 
 

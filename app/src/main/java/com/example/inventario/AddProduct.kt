@@ -28,11 +28,22 @@ class AddProduct : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        viewModel = ViewModelProviders.of(this).get(InventarioViewModel::class.java)
-        viewModel.addPantes(nombre.text.toString(), codigo.text.toString())
-        return NavigationUI.onNavDestinationSelected(item!!,
-            view!!.findNavController())
-                || super.onOptionsItemSelected(item)
+
+        when (item!!.itemId) {
+            R.id.save -> {
+                viewModel = ViewModelProviders.of(this).get(InventarioViewModel::class.java)
+                viewModel.addPantes(nombre.text.toString(), codigo.text.toString())
+                val home=ProductList()
+
+                val fragmentManager=fragmentManager
+
+                val fragmentTransaction=fragmentManager!!.beginTransaction()
+                fragmentTransaction.remove(this)
+                fragmentTransaction.replace(R.id.fragment3,home).commit()
+            }
+            else -> return super.onOptionsItemSelected(item)
+        }
+        return true
     }
 
 

@@ -23,12 +23,12 @@ class FechaInv : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         viewModel = ViewModelProviders.of(this).get(InventarioViewModel::class.java)
-        val binding = DataBindingUtil.inflate<FragmentFechaInvBinding>(inflater, R.layout.inventario_fragment, container, false)
+        val binding = DataBindingUtil.inflate<FragmentFechaInvBinding>(inflater, R.layout.fragment_fecha_inv, container, false)
         adapt = Adapt(viewModel.getmisinv())
         binding.recyclerView.adapter=adapt
         binding.recyclerView.layoutManager= LinearLayoutManager(activity)
 
-        fabfecha.setOnClickListener{
+        binding.fabfecha.setOnClickListener{
             viewModel.addI()
             var array=viewModel.getmisinv()
             adapt.add(array[array.size-1])

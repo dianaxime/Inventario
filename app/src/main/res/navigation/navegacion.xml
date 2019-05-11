@@ -11,7 +11,9 @@
     <fragment android:id="@+id/inventario" android:name="com.example.inventario.Inventario"
               android:label="Inventory Plus" tools:layout="@layout/inventario_fragment"/>
     <fragment android:id="@+id/addProduct" android:name="com.example.inventario.AddProduct"
-              android:label="Crear Producto" tools:layout="@layout/fragment_add_product"/>
+              android:label="Crear Producto" tools:layout="@layout/fragment_add_product">
+        <action android:id="@+id/action_addProduct_to_productList" app:destination="@id/productList"/>
+    </fragment>
     <fragment android:id="@+id/productList" android:name="com.example.inventario.ProductList"
               android:label="Productos" tools:layout="@layout/fragment_product_list">
         <action android:id="@+id/action_productList_to_addProduct" app:destination="@id/addProduct"/>

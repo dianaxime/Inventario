@@ -1,17 +1,18 @@
 package models
 
-import android.content.Context
+import android.arch.lifecycle.ViewModelProviders
+import android.support.design.widget.FloatingActionButton
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.TextView
+import com.example.inventario.InventarioViewModel
 import com.example.inventario.R
 
 
 class AdaptadorInv (private val items: ArrayList<Fila>): RecyclerView.Adapter<AdaptadorInv.ViewHolder>() {
-
+    var viewModel= InventarioViewModel()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val contentView =LayoutInflater.from(parent.context).inflate(R.layout.card, null)
         return ViewHolder(contentView)
@@ -36,12 +37,17 @@ class AdaptadorInv (private val items: ArrayList<Fila>): RecyclerView.Adapter<Ad
         }
         p0.quitar.setOnClickListener{
             var num =filaI.getCantidad() - 1
-            if (num>=0) filaI.setCantidad(num)
+            if (num>=0) {
+                items[p1].setCantidad(num)
+                //viewModel.mylist[p1].myProductos[p1].setCantidad(num)
+            }
             else {
                 num=0
-                filaI.setCantidad(num)
+                //viewModel.mylist[p1].myProductos[p1].setCantidad(num)
+                items[p1].setCantidad(num)
+                //filaI.setCantidad(num)
             }
-            p0.modcant.text=filaI.getCantidad().toString()
+            p0.modcant.text=items[p1].getCantidad().toString()
         }
 //        notifyDataSetChanged()
     }
@@ -66,8 +72,8 @@ class AdaptadorInv (private val items: ArrayList<Fila>): RecyclerView.Adapter<Ad
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
         var modproduct: TextView =itemView.findViewById(R.id.productview)
         var modcant: TextView =itemView.findViewById(R.id.cantview)
-        var agregar: Button =itemView.findViewById(R.id.sumar)
-        var quitar: Button =itemView.findViewById(R.id.restar)
+        var agregar: FloatingActionButton =itemView.findViewById(R.id.sumar)
+        var quitar: FloatingActionButton =itemView.findViewById(R.id.restar)
 
 
 
