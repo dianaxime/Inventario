@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools" android:id="@+id/navegacion"
+            app:startDestination="@id/fechaInv">
+
+    <fragment android:id="@+id/fechaInv" android:name="com.example.inventario.FechaInv"
+              android:label="Inventarios" tools:layout="@layout/fragment_fecha_inv">
+        <action android:id="@+id/action_fechaInv_to_inventario" app:destination="@id/inventario"/>
+    </fragment>
+    <fragment android:id="@+id/inventario" android:name="com.example.inventario.Inventario"
+              android:label="Inventory Plus" tools:layout="@layout/inventario_fragment"/>
+    <fragment android:id="@+id/addProduct" android:name="com.example.inventario.AddProduct"
+              android:label="Crear Producto" tools:layout="@layout/fragment_add_product"/>
+    <fragment android:id="@+id/productList" android:name="com.example.inventario.ProductList"
+              android:label="Productos" tools:layout="@layout/fragment_product_list">
+        <action android:id="@+id/action_productList_to_addProduct" app:destination="@id/addProduct"/>
+    </fragment>
+</navigation>
